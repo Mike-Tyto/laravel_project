@@ -10,7 +10,10 @@ def plot_weight(data_json):
     data = pd.DataFrame(json.loads(data_json))
 
     # Преобразуем timestamp в datetime
-    data['timestamp'] = pd.to_datetime(data['timestamp'])
+    # data['timestamp'] = pd.to_datetime(data['timestamp'])
+
+    # sorted_data = sorted(data, key='timestamp')
+    # sorted_data = [[i]+sorted_data[i] for i in range(1, len(sorted_data)+1)]
 
     # Построение графика
     plt.figure(figsize=(10, 6))
