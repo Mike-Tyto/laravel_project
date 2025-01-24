@@ -35,6 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/messages/inbox', [MessageController::class, 'inbox'])->name('messages.inbox');
+    Route::get('/messages/sent', [MessageController::class, 'sent'])->name('messages.sent');
+});
+
 Route::get('/test', function () {
     return view('test');
 })->middleware(['auth', 'verified'])->name('test');

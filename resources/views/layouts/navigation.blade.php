@@ -55,7 +55,7 @@
             <x-responsive-nav-link :href="route('farms.index')" :active="request()->routeIs('/farms')">
                 {{ __('Farms') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('messages.index')" :active="request()->routeIs('/messages')">
+            <x-responsive-nav-link :href="route('messages.inbox')" :active="request()->routeIs('/messages')">
                 {{ __('Messages') }}
             </x-responsive-nav-link>
         </div>

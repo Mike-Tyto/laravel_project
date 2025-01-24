@@ -26,7 +26,7 @@ class MessageController extends Controller
 
     public function create()
     {
-        $users = User::all(); // Получение всех пользователей
+        $users = User::where('id', '!=', auth()->id())->get();
         return view('messages.create', compact('users'));
     }
 
@@ -44,6 +44,22 @@ class MessageController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('messages.index')->with('success', 'Message sent successfully!');
+        return redirect()->route('messages.sent')->with('success', 'Message sent successfully!');
+    }
+
+    public function inbox()
+    {
+        // Получить входящие сообщения для текущего пользователя
+        $messages = Message::where('receiver_id', auth()->id())->orderBy('created_at', 'desc')->get();
+
+        return view('messages.inbox', compact('messages'));
+    }
+
+    public function sent()
+    {
+        // Получить исходящие сообщения для текущего пользователя
+        $messages = Message::where('sender_id', auth()->id())->orderBy('created_at', 'desc')->get();
+
+        return view('messages.sent', compact('messages'));
     }
 }
