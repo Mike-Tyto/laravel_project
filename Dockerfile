@@ -2,6 +2,9 @@ FROM php:8.2-fpm
 
 # Установка системных зависимостей
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
     zip \
     unzip \
     git \

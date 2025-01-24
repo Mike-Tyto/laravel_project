@@ -6,7 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\FarmController;
 use App\Http\Controllers\MessageController;
-use App\Http\Controllers\AdafruitController;
+use App\Http\Controllers\WeightController;
+use App\Http\Controllers\PlotController;
 
 Route::get('/', function () {
     return view('auth/login');
@@ -17,7 +18,6 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-// Route::get('/dashboard', [AdafruitController::class, 'updateWeight']);
 
 Route::get('/animals/create', [AnimalController::class, 'create'])->name('animals.create');
 Route::post('/animals/store', [AnimalController::class, 'store'])->name('animals.store');
@@ -41,6 +41,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/messages/inbox', [MessageController::class, 'inbox'])->name('messages.inbox');
     Route::get('/messages/sent', [MessageController::class, 'sent'])->name('messages.sent');
 });
+
+Route::get('/weights', [WeightController::class, 'selectRfid'])->name('weights.select');
+Route::post('/weights/plot', [WeightController::class, 'plotWeight'])->name('weights.plot');
+Route::get('/plot/image/{rfid}', [PlotController::class, 'generatePlot'])->name('plot.image');
 
 Route::get('/test', function () {
     return view('test');

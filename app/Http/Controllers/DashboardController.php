@@ -33,8 +33,10 @@ class DashboardController extends Controller
         $data = $response->json(); // Массив с данными
 
         if (empty($data)) {
-            return response()->json(['message' => 'No data to process'], 200);
-        }
+            $weights = Weight::orderBy('timestamp', 'desc')->get();
+
+            return view('dashboard', compact('weights'));
+        }        
 
         foreach ($data as $entry) {
             // Разделение строки на rfid и value

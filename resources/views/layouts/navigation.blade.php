@@ -46,6 +46,9 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('weights.select')" :active="request()->routeIs('weights.select')">
+                {{ __('Plots') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('test')" :active="request()->routeIs('test')">
                 {{ __('Test') }}
             </x-responsive-nav-link>
