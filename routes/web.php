@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\FarmController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\AdafruitController;
 
 Route::get('/', function () {
     return view('auth/login');
@@ -16,6 +17,7 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', [AdafruitController::class, 'updateWeight']);
 
 Route::get('/animals/create', [AnimalController::class, 'create'])->name('animals.create');
 Route::post('/animals/store', [AnimalController::class, 'store'])->name('animals.store');

@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Weight;
 use Illuminate\Support\Facades\Http;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
+use App\Models\Weight;
 
-class DashboardController extends Controller
+class AdafruitController extends Controller
 {
-    public function index()
+    public function updateWeight()
     {
-        // Получение данных из Adafruit IO
+        // Конфигурация Adafruit IO
         $username = env('ADAFRUIT_IO_USERNAME'); // Ваш Adafruit IO username
         $apiKey = env('ADAFRUIT_IO_KEY');       // Ваш Adafruit IO API Key
         $feedName = 'weight';                  // Имя фида
-        
+
         // URL для работы с фидом
         $url = "https://io.adafruit.com/api/v2/{$username}/feeds/{$feedName}/data";
 
@@ -53,9 +51,6 @@ class DashboardController extends Controller
             ])->delete("{$url}/{$entry['id']}");
         }
 
-        // Получение всех данных из таблицы weights для отображения на dashboard
-        $weights = Weight::orderBy('timestamp', 'desc')->get();
-
-        return view('dashboard', compact('weights'));
+        return response()->json(['message' => 'Data successfully updated'], 200);
     }
 }
